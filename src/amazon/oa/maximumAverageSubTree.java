@@ -1,4 +1,4 @@
-package amazon.oa.Graph;
+package amazon.oa;
 
 
 import DataStructure.NaryTreeNode;
@@ -8,7 +8,7 @@ import DataStructure.NaryTreeNode;
  * Given the root of a binary tree, find the maximum average value of any subtree of that tree.
  */
 
-public class maximumTree {
+public class maximumAverageSubTree {
     private static double ans;
     private static NaryTreeNode ansRoot;
 

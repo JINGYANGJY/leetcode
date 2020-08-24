@@ -1,4 +1,4 @@
-package amazon.oa.Graph;
+package amazon.oa;
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ import java.util.*;
  * Find the least number of unique integers after removing exactly k elements.
  */
 
-public class slidingwindow {
+public class sorting {
     public static void main(String[] args) {
         int[] arr = {5, 5, 4};
         System.out.println(findLeastNumOfUniqueInts(arr, 1));

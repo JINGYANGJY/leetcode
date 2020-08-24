@@ -1,4 +1,4 @@
-package amazon.oa.Graph;
+package amazon.oa;
 
 import java.util.Arrays;
 import java.util.List;
