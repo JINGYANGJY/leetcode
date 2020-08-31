@@ -33,13 +33,18 @@ import java.util.List;
  * 		6.    XXX
  * 		    NNNNNNNNN
  * Solution steps:
- * 		if (3 or 4)
- * 				add to res
+ * 		if (3)
+ * 			add to res
+ * 	    else if (4)
+ * 	        if (!merge)
+ * 	            add newInterval to res
+ * 			add to res
  * 		else
- * 					if mergebefore
- * 										create a new intervals[i] with newInterval
- * 					else
- * 										update the res last one
+ * 			if (!merge)
+ * 				create a new intervals[i] with newInterval
+ * 				add to res
+ * 			else
+ * 				update the res last one
  * 		Time: O(n)
  */
 
@@ -51,7 +56,7 @@ public class InsertInterval {
             if (intervals[i][1] < newInterval[0] ) {
                 res.add(intervals[i]);
             } else if (intervals[i][0] > newInterval[1]) {
-                if (!merge) {
+                if (!merge) { // ❌但是改过来的点
                     res.add(newInterval);
                     merge = true;
                 }
@@ -67,7 +72,7 @@ public class InsertInterval {
                 }
             }
         }
-        if (!merge) {
+        if (!merge) { // ❌但是改过来的点
             res.add(newInterval);
         }
         return res.toArray(new int[res.size()][]);
