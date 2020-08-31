@@ -20,17 +20,17 @@ import java.util.List;
  * M2:
  * 		intervals[i] relationship with newInterval
  * 		1.  XXXXXXX
- * 		            NNNNNNN
- * 		2.           XXXXXXX
+ * 		        NNNNNNN
+ * 		2.      XXXXXXX
  * 	        NNNNNNN
  *
  * 		3. XXXXXX
- * 													NNNNN
- * 		4.                   XXXXXX
+ * 				    NNNNN
+ * 		4.            XXXXXX
  * 		        NNNN
  * 		5. XXXXXXXX
- * 		          NNN
- * 		6.       XXX
+ * 		      NNN
+ * 		6.    XXX
  * 		    NNNNNNNNN
  * Solution steps:
  * 		if (3 or 4)
