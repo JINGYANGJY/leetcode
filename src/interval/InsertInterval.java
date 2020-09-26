@@ -62,14 +62,18 @@ public class InsertInterval {
                 }
                 res.add(intervals[i]);
             } else {
-                if (!merge) {
-                    int[] addToRes = new int[]{Math.min(intervals[i][0], newInterval[0]), Math.max(intervals[i][1], newInterval[1])};
-                    res.add(addToRes);
-                    merge = true;
-                } else {
-                    int[] last = res.get(res.size() - 1);
-                    last[1] = Math.max(intervals[i][1], last[1]);
-                }
+                //我的写法
+//                if (!merge) {
+//                    int[] addToRes = new int[]{Math.min(intervals[i][0], newInterval[0]), Math.max(intervals[i][1], newInterval[1])};
+//                    res.add(addToRes);
+//                    merge = true;
+//                } else {
+//                    int[] last = res.get(res.size() - 1);
+//                    last[1] = Math.max(intervals[i][1], last[1]);
+//                }
+                //老师的写法
+                newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
+                newInterval[1] = Math.max(intervals[i][1], newInterval[1]);
             }
         }
         if (!merge) { // ❌但是改过来的点
