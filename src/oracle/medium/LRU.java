@@ -116,7 +116,8 @@ class LRU {
         // get(1)  -1
         // get(3)  3
         // put(5, 5)
-        // get(4) -1
+        // get(4)
+        System.out.println(Math.sqrt(Double.MAX_VALUE));
         LRU lru = new LRU(3);
         lru.put(1, 1);
         lru.put(2, 2);
