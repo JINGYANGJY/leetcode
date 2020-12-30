@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class postorder {
+    static class Node {
+        TreeNode n;
+        int value;
+    }
+
+    public static void print() {
+        Node n = new Node();
+        System.out.println(n);
+    }
     public static List<Integer> postorder(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         TreeNode cur = firstNode(root);
@@ -45,6 +54,9 @@ public class postorder {
     }
 
     public static void main(String[] args) {
+        StringBuilder s = new StringBuilder("aaaa");
+
+        print();
         TreeNode t1 = new TreeNode(1);
         TreeNode t2 = new TreeNode(2);
         TreeNode t3 = new TreeNode(3);

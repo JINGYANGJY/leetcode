@@ -18,11 +18,6 @@ public class preorder {
         return cur;
     }
 
-//                   1
-//                 /   \
-//                 2    3
-
-
     private static TreeNode nextNode(TreeNode cur) {
         if (cur == null) {
             return cur;

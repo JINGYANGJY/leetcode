@@ -4,7 +4,12 @@ public class Main {
 
     public static void main(String[] args) {
         String input = "hello world";
-        System.out.println(capatize(input));
+        int m = 5;
+        int n = 1 << m;
+        System.out.println(Integer.toBinaryString(n));
+        n = n | (1<<2);
+        System.out.println(Integer.toBinaryString(n));
+        //System.out.println(capatize(input));
     }
     public static String capatize(String input) {
         StringBuilder res = new StringBuilder();
