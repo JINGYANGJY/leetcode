@@ -39,9 +39,10 @@ public class Ancestor2 {
         if (!graph.containsKey(cur) || graph.get(cur).size() == 0) {
             return;
         }
+
         for (Integer p : graph.get(cur)) {
-            findAllParents(graph, res, p);
             res.add(p);
+            findAllParents(graph, res, p);
         }
     }
 
@@ -49,7 +50,7 @@ public class Ancestor2 {
         int[][] input = {{1,4}, {1,5}, {2,5}, {3,6}, {6,7}};
         int[][] edges = { { 1, 4 }, { 1, 5 }, { 2, 5 }, { 3, 6 }, { 6, 7 }, { 3, 8 } };
         System.out.println(Ancestor(edges, 7, 8));
-        boolean res = Ancestor(input, 6, 5);
+        boolean res = Ancestor(input, 4, 5);
         System.out.println(res);
     }
 }

@@ -53,13 +53,36 @@ public class Domain1 {
 
     public static void main(String[] args) {
         String[] domains = { "900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org" };
-        List<String> result = subdomainVisits(domains);
+        //List<String> result = subdomainVisits(domains);
+        List<String> result = domain(domains);
         System.out.println("[");
         for (String s : result) {
             System.out.println(s + ", ");
         }
         System.out.println("]");
     }
+
+    public static List<String> domain(String[] input) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String s : input) {
+            String[] countAndDomain = s.split(" ");
+            Integer count = Integer.valueOf(countAndDomain[0]);
+            String domain = countAndDomain[1];
+            char[] arr = domain.toCharArray();
+            for (int i = -1; i < arr.length; i++) {
+                if (i == -1 || arr[i] == '.') {
+                    String d = domain.substring(i + 1);
+                    map.put(d, map.getOrDefault(d, 0) + count);
+                }
+            }
+        }
+        List<String> res = new ArrayList<>();
+        for (String s : map.keySet()) {
+            res.add(String.valueOf(map.get(s)) + " "+ s);
+        }
+        return res;
+    }
+
 
 
 

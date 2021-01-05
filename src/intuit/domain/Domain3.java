@@ -61,11 +61,46 @@ public class Domain3 {
                 "3123122444,92.130.6.145", "39471289472,2001:0db8:ac10:fe01:0000:0000:0000:0000",
                 "8321125440,82.1.106.8", "99911063,92.130.6.144" };
         List<String> result = AdsConversion(completedId, adClicks, allUser);
+        List<String> r = completedOrders(completedId, adClicks, allUser);
         System.out.println("[");
         for (String s : result) {
             System.out.println(s);
         }
         System.out.println("]");
-
+        System.out.println("---------------------");
+        System.out.println("[");
+        for (String s : r) {
+            System.out.println(s);
+        }
+        System.out.println("]");
     }
+
+    public static List<String> completedOrders(String[] completedUserId, String[] adClicks, String[] allUserIp) {
+        Map<String, String> ipToId = new HashMap<>();
+        Set<String> ids = new HashSet<>(Arrays.asList(completedUserId));
+        Map<String, Integer> completed = new HashMap<>();
+        Map<String, Integer> clicks = new HashMap<>();
+        for (String s : allUserIp) {
+            String[] ipAndId = s.split(",");
+            ipToId.put(ipAndId[1], ipAndId[0]);
+        }
+        for (String click : adClicks) {
+            String[] items = click.split(",");
+            String ip = items[0];
+            String product = items[2];
+            clicks.put(product, clicks.getOrDefault(product, 0) + 1);
+            if (ids.contains(ipToId.get(ip))) {
+                completed.put(product, completed.getOrDefault(product, 0) + 1);
+            }
+        }
+        List<String> res = new ArrayList<>();
+        for (String s : completed.keySet()) {
+            Integer n = clicks.get(s);
+            Integer m = completed.get(s);
+            res.add(String.valueOf(m) + " of " + String.valueOf(n) +
+" " + s);
+        }
+        return res;
+    }
+
 }

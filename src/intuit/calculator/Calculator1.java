@@ -41,8 +41,32 @@ public class Calculator1 {
         }
         return res;
     }
+    public static int calculator2(String input) {
+        char operator = '+';
+        int res = 0;
+        char[] arr = input.toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == '+' || arr[i] == '-') {
+                operator = arr[i];
+            } else {
+                int operands = 0;
+                while (i < arr.length && Character.isDigit(arr[i])) {
+                    operands = operands * 10 + arr[i++] - '0';
+                }
+                i -= 1;
+                if (operator == '+') {
+                    res += operands;
+                } else {
+                    res -= operands;
+                }
+            }
+        }
+        return res;
+    }
+
 
     public static void main(String[] args) {
+        System.out.println(calculator2("2+3-999"));
         System.out.println(calculator("2+3-999"));
     }
 }

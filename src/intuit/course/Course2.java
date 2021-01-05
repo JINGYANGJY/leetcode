@@ -55,7 +55,35 @@ public class Course2 {
     public static void main(String[] args) {
         String[][] courses = { { "A", "B" }, { "C", "D" }, { "B", "C" }, { "E", "F" }, { "D", "E" }, { "F", "G" }, {"G", "H"}};
         System.out.println(middleClass(courses));
+        System.out.println(middleCourse(courses));
     }
+
+    public static String middleCourse(String[][] input) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Integer> inDegree = new HashMap<>();
+        for (String[] str : input) {
+            map.put(str[0], str[1]);
+            inDegree.put(str[1], inDegree.getOrDefault(str[1], 0) + 1);
+        }
+        String first = "";
+        for (String s : map.keySet()) {
+            if (!inDegree.containsKey(s)) {
+                first = s;
+                break;
+            }
+        }
+        int index = 0;
+        int courses = inDegree.size() + 1;
+        int middleIndex = courses % 2 == 0 ? courses / 2 - 1 : courses / 2;
+        String res = "";
+        while (index < middleIndex) {
+            res = map.get(first);
+            first = res;
+            index++;
+        }
+        return res;
+    }
+
 
 
 }

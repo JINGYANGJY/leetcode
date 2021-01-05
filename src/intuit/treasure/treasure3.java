@@ -1,6 +1,7 @@
 package intuit.treasure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class treasure3 {
@@ -47,16 +48,16 @@ public class treasure3 {
     private static void dfs(int[] cur, List<int[]> path, int treasures, int[] longest, boolean[][] visited, int numOfTreasure, int[] end, int[][] grid, List<List<int[]>> paths) {
         if (cur[0] == end[0] && cur[1] == end[1] && treasures == numOfTreasure) {
             if (path.size() < longest[0]) {
-                paths.removeAll(paths);
+                paths.clear();
                 longest[0] = path.size();
                 paths.add(new ArrayList<>(path));
             } else if (path.size() == longest[0]) {
                 paths.add(new ArrayList<>(path));
             }
         }
-        for (int[] d : directions) {
-            int dx = d[0] + cur[0];
-            int dy = d[1] + cur[1];
+        for (int[] dir : directions) {
+            int dx = dir[0] + cur[0];
+            int dy = dir[1] + cur[1];
             if (dx < 0 || dy < 0 || dx == grid.length || dy == grid[0].length || visited[dx][dy] || grid[dx][dy] == -1) {
                 continue;
             }
@@ -93,7 +94,7 @@ public class treasure3 {
                         { -1, 0, 0, 0, 0 },
                         { 0, 1, -1, 0, 0 },
                         { 0, 0, 0, 0, 0 } };
-        List<List<int[]>> paths = shortestPath(grid, new int[] { 0, 0 }, new int[] { 4, 1 });
+        List<List<int[]>> paths = shortestPath(grid, new int[] { 5, 2}, new int[] { 2, 0 });
 
         for (List<int[]> path : paths) {
             System.out.println("Path:[");

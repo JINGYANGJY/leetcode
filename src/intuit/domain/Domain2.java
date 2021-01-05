@@ -62,12 +62,35 @@ public class Domain2 {
     public static void main(String[] args) {
         String[] s1 = { "3234.html", "xys.html", "7hsaa.html" }; // user1
         String[] s2 = { "3234.html", "sdhsfjdsh.html", "xys.html", "7hsaa.html" }; // user2
-        List<String> result = commonHistory(s1, s2);
+        //List<String> result = commonHistory(s1, s2);
+        List<String> result = commonLongest(s1, s2);
         System.out.println("[");
         for (String s : result) {
             System.out.println(s + " ,");
         }
         System.out.println("]");
     }
+    public static List<String> commonLongest(String[] s1, String[] s2) {
+        int res = 0;
+        int n = s1.length;
+        int m = s2.length;
+        int startIndex = 0;
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (s1[i - 1].equals(s2[j - 1])) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                }
+                res = Math.max(res, dp[i][j]);
+            }
+        }
+        List<String> result = new ArrayList<>();
+        for (int i = startIndex; i <= startIndex + res; i++) {
+            result.add(s1[i]);
+        }
+        return result;
+
+    }
+
 
 }

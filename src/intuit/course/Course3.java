@@ -53,7 +53,7 @@ public class Course3 {
     }
     private static void dfs(String cur, Map<String, Set<String>> graph, List<String> path,  Set<String> res) {
         if (!graph.containsKey(cur) || graph.get(cur).size() == 0) {
-            System.out.println(Arrays.deepToString(path.toArray()));
+            //System.out.println(Arrays.deepToString(path.toArray()));
             int len = path.size();
             if (len <= 0) {
                 return;
@@ -91,5 +91,48 @@ public class Course3 {
         for (String s : res) {
             System.out.println(s);
         }
+        System.out.println("------------------------");
+        Set<String> r = middleCourse(all_courses);
+        for (String s : r) {
+            System.out.println(s);
+        }
     }
+
+    public static Set<String> middleCourse(String[][] input) {
+        Map<String, List<String>> map = new HashMap<>();
+        Map<String, Integer> inDegree = new HashMap<>();
+        for (String[] str : input) {
+            map.putIfAbsent(str[0], new ArrayList<>());
+            map.get(str[0]).add(str[1]);
+            inDegree.put(str[1], inDegree.getOrDefault(str[1], 0) + 1);
+        }
+        List<String> startCourses = new ArrayList<>();
+        for (String s : map.keySet()) {
+            if (!inDegree.containsKey(s)) {
+                startCourses.add(s);
+            }
+        }
+        Set<String> res = new HashSet<>();
+        for (String c : startCourses) {
+            List<String> path = new ArrayList<>();
+            path.add(c);
+            dfs(c, map, res, path);
+        }
+        return res;
+    }
+    //find the middle of each path
+    private static void dfs(String cur, Map<String, List<String>> map, Set<String> res, List<String> path) {
+        if (!map.containsKey(cur) || map.get(cur).size() == 0) {
+            int size = path.size();
+            int middleIndex = size % 2 == 0 ? size / 2 - 1 : size / 2;
+            res.add(path.get(middleIndex));
+            return;
+        }
+        for (String n : map.get(cur)) {
+            path.add(n);
+            dfs(n, map, res, path);
+            path.remove(path.size() - 1);
+        }
+    }
+
 }

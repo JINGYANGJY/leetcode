@@ -65,5 +65,44 @@ public class island1 {
         for (int[] r : res) {
             System.out.println(Arrays.toString(r));
         }
+        System.out.println("-----------------");
+        List<int[]> r = findRectangle(islands);
+        for (int[] c : r) {
+            System.out.println(c[0] + "," + c[1]);
+        }
     }
+
+    public static List<int[]> findRectangle(int[][] input) {
+        int n = input.length;
+        int m = input[0].length;
+        List<int[]> res = new ArrayList<>();
+        boolean[][] visited = new boolean[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (input[i][j] == 0 && !visited[i][j]) {
+                    res.add(new int[]{i, j});
+                    int[] cor = new int[2];
+                    dfs(i, j, input, visited, cor);
+                    res.add(cor);
+                }
+            }
+        }
+        return res;
+    }
+
+    private static int[][] directions = {{1, 0}, {0, 1}};
+    private static void dfs(int i, int j, int[][] input, boolean[][] visited, int[] res) {
+        if (i < 0 || j < 0 || i == input.length || j == input[0].length || input[i][j] != 0 || visited[i][j]) {
+            return;
+        }
+        visited[i][j] = true;
+        res[0] = Math.max(res[0], i);
+        res[1] = Math.max(res[1], j);
+        for (int[] d : directions) {
+            int dx = d[0] + i;
+            int dy = d[1] + j;
+            dfs(dx, dy, input, visited, res);
+        }
+    }
+
 }

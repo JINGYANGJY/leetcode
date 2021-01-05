@@ -59,6 +59,55 @@ public class Q2 {
             System.out.print(dp + " : ");
             System.out.println(res.get(dp));
         }
+        System.out.println("--------------");
+        List<String> r = departments(employees, friendships);
+        for (String s : r) {
+            System.out.println(s);
+        }
     }
+
+    public static Map<Integer, List<Integer>> constructGraph(List<int[]> friendships) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int[] fs : friendships) {
+            int w = fs[0];
+            int v = fs[1];
+            graph.putIfAbsent(w, new ArrayList<>());
+            graph.putIfAbsent(v, new ArrayList<>());
+            graph.get(w).add(v);
+            graph.get(v).add(w);
+        }
+        return graph;
+    }
+
+
+    public static List<String> departments(List<String> employees, List<int[]> friendships) {
+        Map<Integer, String> departments = new HashMap<>();
+        Map<Integer, List<Integer>> graph = constructGraph(friendships);
+        for (String employee : employees) {
+            String[] items = employee.split(",");
+            Integer id = Integer.valueOf(items[0]);
+            String dp = items[2];
+            departments.put(id, dp);
+        }
+        Map<String, Integer> numEmployees = new HashMap<>();
+        Map<String, Integer> friends = new HashMap<>();
+        for (Integer i : graph.keySet()) {
+            String dp = departments.get(i);
+            numEmployees.put(dp, numEmployees.getOrDefault(dp, 0) + 1);
+            for (Integer f : graph.get(i)) {
+                String dpF = departments.get(f);
+                if (!dp.equals(dpF)) {
+                    friends.put(dp, friends.getOrDefault(dp, 0) + 1);
+                }
+            }
+        }
+        List<String> res = new ArrayList<>();
+        for (String dp : numEmployees.keySet()) {
+            res.add(dp + " num: " + String.valueOf(numEmployees.get(dp))
+                    + " friends: " + String.valueOf(friends.get(dp)));
+        }
+        return res;
+    }
+
 
 }

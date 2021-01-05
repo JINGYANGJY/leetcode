@@ -75,5 +75,55 @@ public class Course1 {
             System.out.println("]");
         }
         System.out.println("}");
+
+        Map<String, List<String>> res = commonCourses(coursePairs);
+        System.out.println("-----------------------------");
+        System.out.println("{");
+        for (String key : res.keySet()) {
+            System.out.println("[" + key + "]" + ": [");
+            for (String s : res.get(key)) {
+                System.out.println(s + " ");
+            }
+            System.out.println("]");
+        }
+        System.out.println("}");
     }
+
+    public static Map<String, List<String>> commonCourses(String[][] input)  {
+        Map<String, Set<String>> courses = new HashMap<>();
+        for (String[] sC : input) {
+            String stu = sC[0];
+            String cours = sC[1];
+            courses.putIfAbsent(stu, new HashSet<>());
+            courses.get(stu).add(cours);
+        }
+        Map<String, List<String>>  res = new HashMap<>();
+        for (String stu : courses.keySet()) {
+            for (String mate : courses.keySet()) {
+                if (stu.equals(mate)) continue;
+                String key = "";
+                if (stu.compareTo(mate) < 0) {
+                    key = stu + ","+ mate;
+                } else {
+                    key = mate + "," + stu;
+                }
+                if (res.containsKey(key)) continue;
+                List<String> commonCourse = getCommon(courses.get(stu), courses.get(mate));
+                res.put(key, commonCourse);
+            }
+        }
+        return res;
+    }
+    // getCommon: time: O(max over {m, n}) space: O(n)
+// m == set1.size n ==set2.size()
+    private static List<String> getCommon(Set<String> set1, Set<String> set2) {
+        List<String> res = new ArrayList<>();
+        for (String s : set1) {
+            if (set2.contains(s)) {
+                res.add(s);
+            }
+        }
+        return res;
+    }
+
 }

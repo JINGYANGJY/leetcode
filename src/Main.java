@@ -9,7 +9,7 @@ public class Main {
         System.out.println(Integer.toBinaryString(n));
         n = n | (1<<2);
         System.out.println(Integer.toBinaryString(n));
-        //System.out.println(capatize(input));
+        System.out.println(Math.pow(2,32));
     }
     public static String capatize(String input) {
         StringBuilder res = new StringBuilder();

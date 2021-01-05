@@ -42,15 +42,16 @@ public class Ancestor3 {
     }
 
     private static void findParents(Map<Integer, Set<Integer>> graph, int x, int[] maxDis, int dis, int[] res, HashSet<Integer> visited) {
+        if (maxDis[0] < dis) {
+            maxDis[0] = Math.max(maxDis[0], dis);
+            res[0] = x;
+        }
         if (visited.contains(x)) {
             return;
         }
         visited.add(x);
         if (!graph.containsKey(x) || graph.get(x).size() == 0) {
-            if (maxDis[0] < dis) {
-                maxDis[0] = Math.max(maxDis[0], dis);
-                res[0] = x;
-            }
+
             return;
         }
         for (Integer i : graph.get(x)) {

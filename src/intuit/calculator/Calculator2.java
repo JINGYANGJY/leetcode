@@ -102,8 +102,53 @@ public class Calculator2 {
     }
 
     public static void main(String[] args) {
-        String s = "2+(1-(2+7-(5-2)))";
+        String s = "2+(1-2+7-(5-2))";
         System.out.println(solution(s));
+        System.out.println(calculator2(s));
     }
+
+    public static int calculator2(String input) {
+        Deque<Integer> operands = new ArrayDeque<>();
+        Deque<OperatorLevel> operators = new ArrayDeque<>();
+        char[] arr = input.toCharArray();
+        int priority = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (Character.isDigit(arr[i])) {
+                int operand = 0;
+                while(i < arr.length && (Character.isDigit(arr[i]))) {
+                    operand = operand * 10 + arr[i++] - '0';
+                }
+                i -= 1;
+                operands.push(operand);
+            } else if (arr[i] == '(' || arr[i] == ')') {
+                if (arr[i] == '(') {
+                    priority++;
+                } else {
+                    priority--;
+                }
+            } else {
+                while (!operators.isEmpty() && operators.peek().level >= priority) {
+                    helper(operands, operators);
+                }
+                operators.push(new OperatorLevel(arr[i], priority));
+            }
+        }
+        while (!operators.isEmpty()) {
+            helper(operands, operators);
+        }
+        return operands.peek();
+    }
+
+    private static void helper(Deque<Integer> operands, Deque<OperatorLevel> operators) {
+        char operator = operators.pop().operator;
+        Integer rightOperand = operands.isEmpty() ? 0 : operands.pop();
+        Integer leftOperand = operands.isEmpty() ? 0 : operands.pop();
+        if (operator == '+') {
+            operands.push(leftOperand + rightOperand);
+        } else {
+            operands.push(leftOperand - rightOperand);
+        }
+    }
+
 
 }

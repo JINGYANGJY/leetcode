@@ -117,12 +117,116 @@ public class Calculator3 {
     }
 
     public static void main(String[] args) {
-        String expression = "(a+b)+c+d+1";
-        String e2 = "2+(1-(2+7-(5-d)))";
+        String expression = "(a+b)+c+d";
+        String e2 = "2+(1-(2+7-(5-dcd)))";
         Map<Character, Integer> freMap = new HashMap<>();
 //        freMap.put('a', 1);
 //        freMap.put('b', 2);
 //        freMap.put('c', 3);
-        System.out.println(calculator(e2, freMap));
+        Map<String, Integer> map = new HashMap<>();
+//        map.put("a", 1);
+//        map.put("b", 2);
+//        map.put("c", 3);
+        System.out.println(calculator(expression, freMap));
+        System.out.println(calculator2(expression, map));
     }
+
+    public static String calculator2(String input, Map<String, Integer> map) {
+        Deque<String> operands = new ArrayDeque<>();
+        Deque<Calculator2.OperatorLevel> operators = new ArrayDeque<>();
+        char[] arr = input.toCharArray();
+        int priority = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (Character.isDigit(arr[i])) {
+                int operand = 0;
+                while(i < arr.length && Character.isDigit(arr[i])) {
+                    operand = operand * 10 + arr[i++] - '0';
+                }
+                i -= 1;
+                operands.push(String.valueOf(operand));
+            } else if (Character.isLetter(arr[i])) {
+                StringBuilder operand = new StringBuilder();
+                while (i < arr.length && Character.isLetter(arr[i])) {
+                    operand.append(String.valueOf(arr[i++]));
+                }
+                i -= 1;
+                String key = operand.toString();
+                if (map.containsKey(key)) {
+                    operands.push(String.valueOf(map.get(key)));
+                } else {
+                    operands.push(key);
+                }
+            } else if (arr[i] == '(' || arr[i] == ')') {
+                if (arr[i] == '(') {
+                    priority++;
+                } else {
+                    priority--;
+                }
+            } else {
+                while (!operators.isEmpty() && operators.peek().level >= priority) {
+                    helper(operands, operators);
+                }
+                operators.push(new Calculator2.OperatorLevel(arr[i], priority));
+            }
+        }
+        while (!operators.isEmpty()) {
+            helper(operands, operators);
+        }
+        return operands.peek();
+    }
+    // only + - calculate order from left to right
+    private static void helper(Deque<String> operands, Deque<Calculator2.OperatorLevel> operators) {
+        char operator = operators.pop().operator;
+        String rightOperand = operands.isEmpty() ? "" : operands.pop();
+        String leftOperand = operands.isEmpty() ? "" : operands.pop();
+        int[] res = new int[1];
+        StringBuilder variables = new StringBuilder();
+        constructRes(res, variables, leftOperand.toCharArray(), '+');
+        constructRes(res, variables, rightOperand.toCharArray(), operator);
+        StringBuilder returnVal = new StringBuilder();
+        if (res[0] == 0) {
+            operands.push(variables.toString().substring(1));
+        } else {
+            operands.push(returnVal.append(String.valueOf(res[0])).append(variables).toString());
+        }
+    }
+
+    private static void constructRes(int[] res, StringBuilder variables, char[] arr, char operator) {
+        char op = operator;
+        for (int i = 0; i < arr.length; i++) {
+            if (Character.isDigit(arr[i])) {
+                int oprd = 0;
+                while (i < arr.length &&
+                        Character.isDigit(arr[i])) {
+                    oprd = oprd * 10 + arr[i++] - '0';
+                }
+                i -= 1;
+                if (op == '+') {
+                    res[0] += oprd;
+                } else {
+                    res[0] -= oprd;
+                }
+            } else if (Character.isLetter(arr[i])) {
+                StringBuilder oprd = new StringBuilder();
+                while (i < arr.length &&
+                        Character.isLetter(arr[i])) {
+                    oprd.append(String.valueOf(arr[i++]));
+                }
+                i -= 1;
+                if (operator == '-') {
+                    op = op == '-' ? '+' : '-';
+                }
+                if (op == '+') {
+                    variables.append("+");
+                    variables.append(oprd.toString());
+                } else {
+                    variables.append("-");
+                    variables.append(oprd.toString());
+                }
+            } else if (arr[i] == '+' || arr[i] == '-') {
+                op = arr[i];
+            }
+        }
+    }
+
 }
