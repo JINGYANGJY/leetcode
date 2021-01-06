@@ -20,7 +20,6 @@ public class Leet1710_MaximumUnitsonaTruck {
     Memory limited method
      */
     public int maximumUnitsMemoryLimited(int[][] boxTypes, int truckSize) {
-        int[] res = new int[1];
         int[][] memo = new int[boxTypes.length][truckSize + 1];
         return dfs(0, boxTypes, truckSize, memo);
     }
