@@ -110,5 +110,56 @@ public class Q2 {
         int[][] rows = { {}, { 1 }, { 1, 2 }, { 1 }, { 2 } };
         int[][] cols = { { 2, 1 }, { 1 }, { 2 }, { 1 } };
         System.out.println(checkNonogram(matrix, rows, cols));
+        System.out.println(checkNonogram2(matrix, rows, cols));
     }
+
+    private static boolean checkNonogram2(int[][] matrix, int[][] row, int[][] cols) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        for (int i = 0; i < n; i++) {
+            int slow = 0;
+            int fast = 0;
+            int index = 0;
+            while (fast <= m) {
+                if (fast == m || fast < m && matrix[i][fast] == 1) {
+                    if (slow < fast && matrix[i][slow] == 0) {
+                      int len = fast - slow;
+                      if (len == row[i][index]) {
+                          index++;
+                      } else {
+                          return false;
+                      }
+                    }
+                    fast++;
+                    slow = fast;
+                } else {
+                    fast++;
+                }
+            }
+        }
+        for (int j = 0; j < m; j++) {
+            int slow = 0;
+            int fast = 0;
+            int index = 0;
+            while (fast <= n) {
+                if (fast == n || fast < n && matrix[fast][j] == 1) {
+                    if (slow < fast && matrix[slow][j] == 0) {
+                        int len = fast - slow;
+                        if (len == cols[j][index]) {
+                            index++;
+                        } else {
+                            return false;
+                        }
+                    }
+                    fast++;
+                    slow = fast;
+                } else {
+                    fast++;
+                }
+
+            }
+        }
+        return true;
+    }
+
 }

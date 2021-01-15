@@ -123,6 +123,10 @@ public class Course3 {
     //find the middle of each path
     private static void dfs(String cur, Map<String, List<String>> map, Set<String> res, List<String> path) {
         if (!map.containsKey(cur) || map.get(cur).size() == 0) {
+            for (String s : path) {
+                System.out.print(s + " ");
+            }
+            System.out.println();
             int size = path.size();
             int middleIndex = size % 2 == 0 ? size / 2 - 1 : size / 2;
             res.add(path.get(middleIndex));

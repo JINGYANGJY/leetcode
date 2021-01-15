@@ -13,13 +13,20 @@ goals to check all meetings has no overlap with new meeting
             or
             [m2]   [m1]
 
+
+        [ m1  ]
+             [ m2 ]
+                              [ m2 ]
+                                  [ m1 ]
+         m1[1] <= m2[0] || m2[1] <= m1[0]
+         -> m1[1] > m2[0] && m2[1] > m1[0]
+
+
  */
 public class MeetingRoom1 {
     public static boolean canArrange(int[][] meetings, int start, int end) {
         for (int[] meeting : meetings) {
-            if (meeting[0] >= end || meeting[1] <= start) {
-                continue;
-            } else {
+            if (meeting[0] < end && meeting[1] > start) {
                 return false;
             }
         }

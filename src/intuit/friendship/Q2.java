@@ -5,6 +5,17 @@ import java.util.*;
 public class Q2 {
     /*
     2nd Question: 输出每个department里有多少人的朋友是其他部门的 ->也就是遍历一遍就好了
+    - Clarify
+        depart how many employees
+               friendsAreOtherDepartment
+        - Map<String, String> departmentMap
+
+           for each employee
+                what department of his
+                        Map<String, Integer>: how many employees of the department
+                    for friend
+                        Map<String, Integer> :how many employees has other department's friends
+        Time: O(n + |V| + |E|)
      */
     public static Map<String, Integer> Q2(List<String> employees, List<int[]> friendships) {
         // simplify input

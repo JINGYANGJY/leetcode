@@ -33,12 +33,6 @@ public class preorder {
         }
         return cur.parent == null ? null :cur.parent.right;
     }
-    //    //     1
-    //    //    /  \
-    //    //    2  4
-    //    //    /
-    //    //    3
-
 
     public static void main(String[] args) {
         TreeNode t1 = new TreeNode(1);

@@ -4,14 +4,14 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class friends1 {
-   /* uppose you are creating an internalnetworking site for your company.
-    You have two data sets to work with. The firstdata set is the employees at your company,
-    and the second is all the pairs ofemployees who are virtually friends so far.
+   /* suppose you are creating an internal networking site for your company.
+    You have two data sets to work with. The first data set is the employees at your company,
+    and the second is all the pairs of employees who are virtually friends so far.
     It does not matter which employee’sID is in which column, the friendships are bidirectional.
-    To get started, youneed to parse and represent each data set in its entirety in code.
-            Furthermore, you also need to implement afunction that,
-            given the employees and friendships as parameters, returns thisdata
-            in the form of an adjacency list representation. This is a mapping of eachemployee
+    To get started, you need to parse and represent each data set in its entirety in code.
+            Furthermore, you also need to implement a function that,
+            given the employees and friendships as parameters, returns this data
+            in the form of an adjacency list representation. This is a mapping of each employee
             ID to a list of his/her friends on the site.
 */
 //    employees.csv:
@@ -32,6 +32,10 @@ public class friends1 {
 //        3: 1
 //        4: 2
 //        6: None
+/*
+        Map<Integer, List<Integer>> graph;
+
+ */
     public static Map<Integer, List<Integer>> constructGraph(List<String> employees, List<int[]> friendships) {
         Map<Integer, String> employeeMap = new HashMap<>();
         Map<Integer, String> departmentMap = new HashMap<>();

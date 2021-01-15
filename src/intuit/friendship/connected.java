@@ -3,6 +3,12 @@ package intuit.friendship;
 import java.util.*;
 
 public class connected {
+    /*
+    components > 1
+            DFS
+                    start unvisited vertex
+
+     */
     public static Map<Integer, List<Integer>> constructGraph(List<String> employees, List<int[]> friendships, int[] anyone) {
         Map<Integer, String> employeeMap = new HashMap<>();
         Map<Integer, String> departmentMap = new HashMap<>();

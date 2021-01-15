@@ -50,7 +50,6 @@ public class postorder {
             return firstNode(cur.parent.right);
         }
         return cur.parent;
-
     }
 
     public static void main(String[] args) {

@@ -16,9 +16,7 @@ import java.util.*;
 public class MeetingRoom3 {
     /*
     Assume each meeting startTime < endTime
-
         _s1___s2____s3___e1___e2____e3__
-
         <startTime, capacity, meeting>
         <endTime, capacity, meeting>
         for each meeting, we want to find its suitable meeting room
@@ -125,80 +123,9 @@ public class MeetingRoom3 {
 //    MB : R2
 //    MA : R1
 
-//    static class Pair {
-//        int index;
-//        int time;
-//        String type;
-//        int numPeople;
-//        String meetingName;
-//        String room;
-//        int roomCapacity;
-//        public Pair(int index, int time, String type, int numPeople, String meetingName) {
-//            this.index = index;
-//            this.time = time;
-//            this.type = type;
-//            this.numPeople = numPeople;
-//            this.meetingName = meetingName;
-//        }
-//
-//    }
-//    public static List<String> assignMeetingRoom(int[][] meetings, int numPeople[], String[] meetingName, int[] capacity, String[] meetingRoom) {
-//        List<Pair> pairs = new ArrayList<>();
-//        int index = 0;
-//        for (int i = 0; i < meetings.length; i++) {
-//            pairs.add(new Pair(index++, meetings[i][0], "start", numPeople[i], meetingName[i]));
-//            pairs.add(new Pair(index++, meetings[i][1], "end", numPeople[i], meetingName[i]));
-//        }
-//        TreeMap<Integer, List<String>> roomMap = new TreeMap<>();
-//        for (int i = 0; i < meetingRoom.length; i++) {
-//            roomMap.putIfAbsent(capacity[i], new ArrayList<>());
-//            roomMap.get(capacity[i]).add(meetingRoom[i]);
-//        }
-//        Collections.sort(pairs, (a, b) -> {
-//            int res = a.time - b.time;
-//                if (res == 0) {
-//                    return a.index - b.index;
-//                }
-//                return res;
-//        });
-//        List<String> res = new ArrayList<>();
-//        for (Pair p : pairs) {
-//            if (p.type.equals("start")) {
-//                String room = assignRoom(roomMap, p);
-//                if (room != null) {
-//                    res.add(p.meetingName + " : " + room);
-//                } else {
-//                    System.out.println("impossible");
-//                    return null;
-//                }
-//            } else {
-//                releaseRoom(roomMap, p);
-//            }
-//        }
-//        return res;
-//    }
-//
-//    private static String assignRoom(TreeMap<Integer, List<String>> roomMap, Pair p) {
-//        Integer key = roomMap.floorKey(p.numPeople);
-//        if (key == null) {
-//            return null;
-//        }
-//        List<String> value = roomMap.get(key);
-//        String res = value.get(value.size() - 1);
-//        p.room = res;
-//        p.roomCapacity = key;
-//        value.remove(value.size() - 1);
-//        if (value.size() == 0) {
-//            roomMap.remove(key);
-//        }
-//        return res;
-//    }
-//
-//    private static void releaseRoom(TreeMap<Integer, List<String>> roomMap, Pair p) {
-//        Integer key = p.roomCapacity;
-//        roomMap.putIfAbsent(key, new ArrayList<>());
-//        roomMap.get(key).add(p.room);
-//    }
+
+
+
 
 
 }

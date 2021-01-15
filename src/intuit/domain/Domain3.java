@@ -1,7 +1,5 @@
 package intuit.domain;
 
-import interview.medium.HitCounter;
-
 import java.util.*;
 
 public class Domain3 {

@@ -49,11 +49,10 @@ public class Ancestor3 {
         if (visited.contains(x)) {
             return;
         }
-        visited.add(x);
         if (!graph.containsKey(x) || graph.get(x).size() == 0) {
-
             return;
         }
+        visited.add(x);
         for (Integer i : graph.get(x)) {
             findParents(graph, i, maxDis, dis + 1, res, visited);
         }
