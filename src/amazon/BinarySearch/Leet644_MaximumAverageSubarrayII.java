@@ -1,4 +1,4 @@
-package BinarySearch;
+package amazon.BinarySearch;
 
 public class Leet644_MaximumAverageSubarrayII {
     public double findMaxAverage(int[] nums, int k) {
