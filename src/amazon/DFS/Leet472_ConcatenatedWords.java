@@ -15,6 +15,7 @@ public class Leet472_ConcatenatedWords {
                 -> check in the words -> set -> O(1)
             Time:
                 O(n * |word.length| ^ 2)
+            还有一种方法，Tire需要实现一下
         */
         List<String> res = new ArrayList<>();
         Set<String> set = new HashSet<>(Arrays.asList(words));
